@@ -1,7 +1,7 @@
 const generatePage = employeesArr => {
     return `
-        <section class="my-3" id="portfolio">
-            <div class="row justify-content-around">
+        <section>
+            <div>
             ${employeesArr
                 .filter(({ role }) => role ==='Manager')
                 .map(({ name, id, email, role, number }) => {
@@ -61,7 +61,6 @@ const generatePage = employeesArr => {
     `;
 };
 
-//formats the HTML page
 module.exports = templateData => {
     return `
     <!DOCTYPE html>
