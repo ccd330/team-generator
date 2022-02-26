@@ -80,7 +80,7 @@ class Index {
             this.manager = new Manager(name, id, email, role);
             this.getOfficeNumber(name, id, email, role);
         } else {
-            (role === 'Engineer') {
+            if (role === 'Engineer'){
                 this.engineer = new Engineer(name, id, email, role);
                 this.getGithub(name, id, email, role);
             } else {
@@ -176,7 +176,7 @@ class Index {
                         })
                 } else {
                     writeFile(generatePage(employees));
-                    console.log('File created!');
+                    console.log('Your file has been created!');
                 }
             })
     }
@@ -184,7 +184,6 @@ class Index {
 }
 
 new Index().getName(role)
-
 
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
