@@ -1,13 +1,12 @@
-const fs = require('fs');
-const inquirer = require("inquirer");
-
+const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generatePage = require('./src/page-template');
+const fs = require('fs');
 
-var employeeArray = [];
+var employeeOptions = [];
 var role = 'Manager';
 
 class Index {
@@ -17,7 +16,7 @@ class Index {
     getName(role){
         inquirer
             .prompt({
-                type: 'input',
+                type: 'text',
                 name: 'name',
                 message: `What is the ${role}'s name? (Required)`,
                 validate: nameInput => {
@@ -39,12 +38,12 @@ class Index {
             .prompt({
                 type: 'input',
                 name: 'id',
-                message: `What is the ${role}'s id? (Required)`,
+                message: `What is the ${role}'s id? (Required) `,
                 validate: idInput => {
                     if (idInput) {
                         return true;
                     } else {
-                        console.log(`Please enter the ${role} id!`);
+                        console.log('Please enter an id!');
                         return false;
                     }
                 } 
@@ -64,7 +63,7 @@ class Index {
                     if (emailInput) {
                         return true;
                     } else {
-                        console.log(`Please enter the ${role} email address!`);
+                        console.log('Please enter an email address!');
                         return false;
                     }
                 } 
@@ -80,12 +79,13 @@ class Index {
             this.manager = new Manager(name, id, email, role);
             this.getOfficeNumber(name, id, email, role);
         } else {
-            if (role === 'Engineer'){
-                this.engineer = new Engineer(name, id, email, role);
-                this.getGithub(name, id, email, role);
-            } else {
+            if (role === 'Intern'){
                 this.intern = new Intern(name, id, email, role);
                 this.getSchool(name, id, email, role);
+            } else {
+                this.engineer = new Engineer(name, id, email, role);
+                this.getGithub(name, id, email, role);
+                
             }
 
         }
@@ -100,15 +100,15 @@ class Index {
                     if (numberInput) {
                         return true;
                     } else {
-                        console.log('Please enter an office number for the Manager!');
+                        console.log('Please enter an office number');
                         return false;
                     }
                 } 
             })
             .then(({ number }) => {
                 this.manager = new Manager(name, id, email, role, number);
-                employeeArray.push(this.manager);
-                this.addEmployee(employeeArray);
+                employeeOptions.push(this.manager);
+                this.addEmployee(employeeOptions);
             })
     }
     getGithub(name,id,email,role){
@@ -116,20 +116,20 @@ class Index {
             .prompt({
                 type: 'input',
                 name: 'github',
-                message: `What is the Engineer's GitHub username? (Required)`,
+                message: "What is the Engineer's github username? (Required)",
                 validate: githubInput => {
                     if (githubInput) {
                         return true;
                     } else {
-                        console.log(`Please enter Engineer's GitHub username!`);
+                        console.log(`Please enter the Engineer's github username!`);
                         return false;
                     }
                 } 
             })
             .then(({ github }) => {
                 this.engineer = new Engineer(name, id, email, role, github);
-                employeeArray.push(this.engineer);
-                this.addEmployee(employeeArray);
+                employeeOptions.push(this.engineer);
+                this.addEmployee(employeeOptions);
             })
     }
     getSchool(name,id,email,role){
@@ -137,20 +137,20 @@ class Index {
             .prompt({
                 type: 'input',
                 name: 'school',
-                message: `What is the Intern's school or university? (Required)`,
+                message: "What is the Intern's school? (Required)",
                 validate: schoolInput => {
                     if (schoolInput) {
                         return true;
                     } else {
-                        console.log(`Please enter Intern's school or university!`);
+                        console.log(`Please enter the Intern's school or university!`);
                         return false;
                     }
                 } 
             })
             .then(({ school }) => {
                 this.intern = new Intern(name, id, email, role, school);
-                employeeArray.push(this.intern);
-                this.addEmployee(employeeArray);
+                employeeOptions.push(this.intern);
+                this.addEmployee(employeeOptions);
             })
     }
     addEmployee(employees){
@@ -166,7 +166,7 @@ class Index {
                     this.index++;
                     inquirer
                         .prompt({
-                            type: 'checkbox',
+                            type: 'list',
                             name: 'role',
                             message: 'What is the employee role?',
                             choices: ['Engineer','Intern']
@@ -185,6 +185,7 @@ class Index {
 
 new Index().getName(role)
 
+
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
         fs.writeFile('./dist/index.html', fileContent, err => {
@@ -194,11 +195,10 @@ const writeFile = fileContent => {
             }
             resolve({
                 ok: true,
-                message: 'Your HTML file has been created!!'
+                message: 'Your file has been created!'
             });
         });
     });
 };
 
 module.exports = Index;
-
