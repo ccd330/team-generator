@@ -24,7 +24,7 @@ Install all dependencies needed.
 
 ## Video
 
-Please view a demonstration of the application in action here:
+Please view a demonstration of the application in action here: https://drive.google.com/file/d/1urVWvwTuUJ8TnovYqQOxw6jpyicXcgJ6/view?usp=sharing
 
 ## Contributions
 
