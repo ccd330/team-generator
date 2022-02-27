@@ -1,12 +1,11 @@
 const Employee = require('../lib/Employee');
-jest.mock('../lib/Employee');
 
 test('creates an employee object', () => {
     const employee = new Employee('Claudia', '1', 'claudiacdavis@gmail.com', 'Employee');
 
     expect(employee.name).toBe('Claudia');
-    expect(employee.id).toEqual(expect.any(string));
-    expect(employee.email).toEqual(expect.any(string));
+    expect(employee.id).toEqual(expect.any(String));
+    expect(employee.email).toEqual(expect.any(String));
     expect(employee.role).toBe('Employee');
 
 });
@@ -29,7 +28,7 @@ test('gets an employees email', () => {
     expect(employee.getEmail()).toEqual(expect.any(String));
 });
 
-test('returns the employee as string', () => {
+test('gets the employees role', () => {
     const employee = new Employee('Claudia');
 
     expect(employee.getRole()).toEqual(expect.any(String));

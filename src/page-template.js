@@ -9,7 +9,7 @@ const generatePage = employeesArr => {
                         <div>
                             <div>
                                 <h3>${name}</h3>
-                                <h5>${role}</h5>
+                                <h4>${role}</h4>
                             </div>
                             <ul>
                                 <li>ID: ${id}</li>
@@ -27,7 +27,7 @@ const generatePage = employeesArr => {
                     <div>
                         <div>
                             <h3>${name}</h3>
-                            <h5> ${role}</h5>
+                            <h4> ${role}</h4>
                         </div>
                         <ul>
                             <li>ID: ${id}</li>
@@ -74,9 +74,7 @@ module.exports = templateData => {
     </head>
     <body>
         <header>
-            <div>
                 <h1>My Team</h1>
-            </div>
         </header>
         <main>
             ${generatePage(templateData)}

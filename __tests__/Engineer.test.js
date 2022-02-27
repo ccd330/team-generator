@@ -12,7 +12,7 @@ test('gets an engineers github', () => {
     expect(engineer.getGithub()).toEqual(expect.any(String));
 })
 
-test('returns the engineer as string', () => {
+test('gets the engineers role', () => {
     const engineer = new Engineer();
 
     expect(engineer.getRole()).toEqual(expect.any(String));
