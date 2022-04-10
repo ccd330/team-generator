@@ -1,5 +1,10 @@
 # Team Profile Generator
 
+## License
+  ![licenseBadge](https://img.shields.io/badge/License-MIT-blue.svg)
+  MIT
+  [See full license information](https://opensource.org/licenses/MIT).
+
 ## Table of Contents
 
 - [Description](#description)
